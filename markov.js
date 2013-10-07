@@ -9,7 +9,7 @@
       inputText: options.inputText,      // The input corpus
       order: options.order || 2,         
       numWords: options.numWords || 100, // # words to generate
-      endWithCompleteSentence: true      // end with complete sentence regardless of numWords
+      endWithCompleteSentence: false      // end with complete sentence regardless of numWords
     }
     this._setup();
 
