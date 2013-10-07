@@ -21,5 +21,11 @@ Now, you're ready to generate text.
 ```javascript
 var text = markov.generate(200); // generate 200 words
 ```
+If you always want to make sure your text ends with a complete sentence (rather than right in the middle) just set `endWithCompleteSentence` to `true` when instantiating the object. By default, this option is set to `false`.
+```javascript
+var markov = new Markov({
+  endWithCompleteSentence: true
+});
+```
 ## License
 MIT.
