@@ -29,8 +29,8 @@
 
     // Get a random succeeding word from the dictionary
     _randomFollower: function(word) {
-      var followingWords = this.dictionary[word];
-      return followingWords[Math.floor(Math.random()*followingWords.length)];
+      var nextWords = this.dictionary[word];
+      return nextWords[Math.floor(Math.random()*nextWords.length)];
     },
 
     // Clip the period from a word ending a sentence
@@ -47,24 +47,25 @@
     generate: function(numWords) {
       var generatedText = "",
           currentWord = SENTENCE_START,
-          followingWord, i = 0;
+          nextWord, i = 0;
 
       while (i < numWords || (this.options.endWithCompleteSentence === true 
               && currentWord !== SENTENCE_START)) {
 
-        followingWord = this._randomFollower(currentWord);
+        nextWord = this._randomFollower(currentWord);
 
-        if (followingWord === SENTENCE_START) {
-        } else if (followingWord === SENTENCE_END) {
+        if (nextWord === SENTENCE_START) {
+        } else if (nextWord === SENTENCE_END) {
           generatedText += '.';
         } else if (currentWord === SENTENCE_START) {
-          generatedText += ' ' + followingWord.charAt(0).toUpperCase() + followingWord.slice(1);
+          generatedText += ' ' + nextWord.charAt(0).toUpperCase() + nextWord.slice(1);
+          i++;
         } else {
-          generatedText += ' ' + followingWord;
+          generatedText += ' ' + nextWord;
+          i++;
         }
 
-        i++;
-        currentWord = followingWord;
+        currentWord = nextWord;
       }
 
       return generatedText;
