@@ -31,8 +31,6 @@
     // Get a random succeeding word from the dictionary
     _randomFollower: function(word) {
       var followingWords = this.dictionary[word];
-      console.log('## ' + word, followingWords);
-      console.log('>> ' + Math.floor(Math.random(followingWords.length)));
       return followingWords[Math.floor(Math.random()*followingWords.length)];
     },
 
