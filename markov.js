@@ -17,45 +17,7 @@
   };
 
   Markov.prototype = {
-
-    // Generate text.
-    _generate: function(numWords) {
-      numWords = numWords || this.params.numWords;
-      var outputText = '',
-        words, word;
-
-      this._resetPrefix();
-
-      for (var i = 0; i < numWords; i++) {
-        words = this.params.dictionary[this.params.prefix.join('#')];
-        word = words[Math.floor(Math.random() * words.length)];
-
-        if (word === ' ') break;
-
-        outputText += word + (this.params.latinBased ? ' ' : '');
-
-        this.params.prefix.shift();
-        this.params.prefix.push(word);
-      }
-      return outputText;
-    },
-
-    // Add a corpus to the Markov chain. 
-    _addCorpus: function(corpusText) {
-      if (!corpusText || corpusText.length === 0) {
-        return;
-      }
-
-      corpusText = corpusText.replace(/#|"/g, '').replace(/\d+:\d+/g, '');
-      corpusText = corpusText.replace(/^\s+|\s+$/g, '').replace(/\s+/g, ' ');
-
-      this.params.corpusText += corpusText;
-      this._resetCorpus();
-      this._resetDictionary();
-      this._addWord(' ');
-    },
-
-    // Set up the Markov object.
+    // Instantiate the Markov dictionary object and add a corpus
     _setup: function() {
       this.dictionary = {};
       this.dictionary[SENTENCE_START] = [];
@@ -66,8 +28,26 @@
       }
     },
 
+    // Get a random succeeding word from the dictionary
+    _randomFollower: function(word) {
+      var followingWords = this.dictionary[word];
+      console.log('## ' + word, followingWords);
+      console.log('>> ' + Math.floor(Math.random(followingWords.length)));
+      return followingWords[Math.floor(Math.random()*followingWords.length)];
+    },
+
+    // Clip the period from a word ending a sentence
+    _removePeriod: function(word) {
+      return word.replace(/\./g, '');
+    },
+
+    // Returns true if a word ends a sentence
+    _isTerminating: function(word) {
+      return (word.charAt(word.length-1) === '.');
+    },
+
+    // Generates a number of words specified by the user
     generate: function(numWords) {
-      console.log(this.dictionary);
       var generatedText = "",
           currentWord = SENTENCE_START,
           followingWord, i = 0;
@@ -97,13 +77,7 @@
       return generatedText;
     },
 
-    _randomFollower: function(word) {
-      var followingWords = this.dictionary[word];
-      console.log('## ' + word, followingWords);
-      console.log('>> ' + Math.floor(Math.random(followingWords.length)));
-      return followingWords[Math.floor(Math.random()*followingWords.length)];
-    },
-
+    // Parses text and adds it to the Markov dictionary
     addCorpus: function(text) {
       text = text
         .replace(/[-,—?!]/g, "")  // remove punctuation for now
@@ -145,67 +119,7 @@
           this.dictionary[SENTENCE_START].push(currentToken);
         }
       }
-    },
-
-    _removePeriod: function(word) {
-      return word.replace(/\./g, '');
-    },
-
-    _isTerminating: function(word) {
-      return (word.charAt(word.length-1) === '.');
-    },
-
-    // Start a new Markov Prefix. 
-    _resetPrefix: function() {
-      this.params.prefix = [];
-      for (var i = 0; i < this.params.order; i++) {
-        this.params.prefix.push(' ');
-      }
-    },
-
-    // Start a new corpus.
-    _resetCorpus: function() {
-      var numForeignChars = 0,
-        corpusLength = this.params.corpusText.length;
-
-      this.params.corpus = [];
-
-      for (var i = 0; i < corpusLength; i++) {
-        if (this.params.corpusText.charCodeAt(i) > 255) {
-          numForeignChars++;
-        }
-      }
-
-      // Determine if Latin-based corpus.
-      // Not exactly scientific, I know.
-      if (numForeignChars >= corpusLength / 3) {
-        this.params.latinBased = false;
-        this.params.corpus = this.params.corpusText.replace(/\s+/g, '').split('');
-      } else {
-        this.params.latinBased = true;
-        this.params.corpus = this.params.corpusText.split(' ');
-      }
-    },
-
-    // Start a new dictionary.
-    _resetDictionary: function() {
-      for (var i = 0; i < this.params.corpus.length; i++) {
-        this._addWord(this.params.corpus[i]);
-      }
-    },
-
-    // Add a single word to the dictionary.
-    _addWord: function(word) {
-      var key = this.params.prefix.join('#');
-
-      if (this.params.dictionary[key] === null || this.params.dictionary[key] === undefined) {
-        this.params.dictionary[key] = [];
-      }
-
-      this.params.dictionary[key].push(word);
-      this.params.prefix.shift();
-      this.params.prefix.push(word);
-    }
+    } // addCorpus
   };
 
   window.Markov = Markov;
