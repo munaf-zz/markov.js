@@ -19,7 +19,7 @@ var markov = new Markov({
 ```
 ### Generate
 ```javascript
-var text = markov.generate(100); // generate 200 words
+var text = markov.generate(100); // generate 100 words
 ```
 If you supply the [Gettysburg Address](http://en.wikipedia.org/wiki/Gettysburg_Address) as a corpus, here is one possible value of `text`:
 
