@@ -9,7 +9,7 @@
       inputText: options.inputText,      // The input corpus
       order: options.order || 2,         
       numWords: options.numWords || 100, // # words to generate
-      endWithPeriod: true                // end with period even if not end of sentence
+      endWithCompleteSentence: true      // end with complete sentence regardless of numWords
     }
     this._setup();
 
@@ -50,7 +50,9 @@
           currentWord = SENTENCE_START,
           followingWord, i = 0;
 
-      while (i < numWords) {
+      while (i < numWords || (this.options.endWithCompleteSentence === true 
+              && currentWord !== SENTENCE_START)) {
+
         followingWord = this._randomFollower(currentWord);
 
         if (followingWord === SENTENCE_START) {
@@ -64,12 +66,6 @@
 
         i++;
         currentWord = followingWord;
-      }
-
-      if (this.options.endWithPeriod === true) {
-        if (generatedText.charAt(generatedText.length-1) !== '.') {
-          generatedText += '.';
-        }
       }
 
       return generatedText;
