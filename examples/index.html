@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Markov Generator Example: Abraham Lincoln</title>
+		<script src="../markov.js"></script>
+		<style>
+			body {
+				font-family: helvetica, arial, sans-serif;
+			}
+
+			h2, div {
+				width: 50%;
+				margin: 1em auto 0em auto;
+			}
+		</style>
+	</head>
+	<body>
+		<h2>Markov Generator Example: Gettysburg Address</h2>
+		<div>
+			<h3>Gettysburg Only</h3>
+			<p id="output-gettysburg"></p>
+			<h3>Gettysburg + Lyceum</h3>
+			<p id="output-combined"></p>
+		</div>
+		<script>
+
+				var markov = new Markov({
+					inputText: "Four score and seven years ago our fathers brought forth on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal. Now we are engaged in a great civil war, testing whether that nation, or any nation so conceived and so dedicated, can long endure. We are met on a great battle-field of that war. We have come to dedicate a portion of that field, as a final resting place for those who here gave their lives that that nation might live. It is altogether fitting and proper that we should do this. But, in a larger sense, we can not dedicate -- we can not consecrate -- we can not hallow -- this ground. The brave men, living and dead, who struggled here, have consecrated it, far above our poor power to add or detract. The world will little note, nor long remember what we say here, but it can never forget what they did here. It is for us the living, rather, to be dedicated here to the unfinished work which they who fought here have thus far so nobly advanced. It is rather for us to be here dedicated to the great task remaining before us -- that from these honored dead we take increased devotion to that cause for which they gave the last full measure of devotion -- that we here highly resolve that these dead shall not have died in vain -- that this nation, under God, shall have a new birth of freedom -- and that government of the people, by the people, for the people, shall not perish from the earth."
+				});
+
+				var gettysburg_para = document.getElementById('output-gettysburg');
+
+				gettysburg_para.appendChild(document.createTextNode(markov.generate(100)));
+
+				// Add part of the Lyceum Address from 1838
+				markov.addCorpus('It would be tedious, as well as useless, to recount the horrors of all of them. Those happening in the State of Mississippi, and at St. Louis, are, perhaps, the most dangerous in example and revolting to humanity. In the Mississippi case, they first commenced by hanging the regular gamblers; a set of men, certainly not following for a livelihood, a very useful, or very honest occupation; but one which, so far from being forbidden by the laws, was actually licensed by an act of the Legislature, passed but a single year before. Next, negroes, suspected of conspiring to raise an insurrection, were caught up and hanged in all parts of the State: then, white men, supposed to be leagued with the negroes; and finally, strangers, from neighboring States, going thither on business, were, in many instances subjected to the same fate. Thus went on this process of hanging, from gamblers to negroes, from negroes to white citizens, and from these to strangers; till, dead men were seen literally dangling from the boughs of trees upon every road side; and in numbers almost sufficient, to rival the native Spanish moss of the country, as a drapery of the forest.');
+
+				var combined_para = document.getElementById('output-combined');
+
+				combined_para.appendChild(document.createTextNode(markov.generate(200)));
+		</script>
+	</body>
+</html>
