@@ -22,9 +22,9 @@ var markov = new Markov({
 var text = markov.generate(100); // generate 200 words
 ```
 If you supply the [Gettysburg Address](http://en.wikipedia.org/wiki/Gettysburg_Address) as a corpus, here is one possible value of `text`:
-```
-It is altogether fitting and proper that cause for which they did here have a final resting place for the world will little note nor long endure. It can not dedicate we can long remember what we are engaged in a larger sense we should do this nation under god shall have thus far above our poor power to the proposition that nation so conceived and dedicated here have consecrated it is rather to the unfinished work which they who here. The earth. We here have a portion of devotion that these honored dead
-```
+
+> It is altogether fitting and proper that cause for which they did here have a final resting place for the world will little note nor long endure. It can not dedicate we can long remember what we are engaged in a larger sense we should do this nation under god shall have thus far above our poor power to the proposition that nation so conceived and dedicated here have consecrated it is rather to the unfinished work which they who here. The earth. We here have a portion of devotion that these honored dead
+
 ### Additional Options
 If you always want to make sure your text ends with a complete sentence (rather than right in the middle) just set `endWithCompleteSentence` to `true` when instantiating the object. By default, this option is set to `false`.
 ```javascript
