@@ -17,10 +17,10 @@
 	<body>
 		<h2>Markov Generator Example: Gettysburg Address</h2>
 		<div>
-			<h3>Gettysburg Only</h3>
+			<h3>Gettysburg</h3>
 			<p id="output-gettysburg"></p>
-			<h3>Gettysburg + Lyceum</h3>
-			<p id="output-combined"></p>
+			<h3>Gettysburg (force end with complete sentence)</h3>
+			<p id="output-gettysburg-complete"></p>
 		</div>
 		<script>
 
@@ -32,12 +32,11 @@
 
 				gettysburg_para.appendChild(document.createTextNode(markov.generate(100)));
 
-				// Add part of the Lyceum Address from 1838
-				markov.addCorpus('It would be tedious, as well as useless, to recount the horrors of all of them. Those happening in the State of Mississippi, and at St. Louis, are, perhaps, the most dangerous in example and revolting to humanity. In the Mississippi case, they first commenced by hanging the regular gamblers; a set of men, certainly not following for a livelihood, a very useful, or very honest occupation; but one which, so far from being forbidden by the laws, was actually licensed by an act of the Legislature, passed but a single year before. Next, negroes, suspected of conspiring to raise an insurrection, were caught up and hanged in all parts of the State: then, white men, supposed to be leagued with the negroes; and finally, strangers, from neighboring States, going thither on business, were, in many instances subjected to the same fate. Thus went on this process of hanging, from gamblers to negroes, from negroes to white citizens, and from these to strangers; till, dead men were seen literally dangling from the boughs of trees upon every road side; and in numbers almost sufficient, to rival the native Spanish moss of the country, as a drapery of the forest.');
+				markov.options.endWithCompleteSentence = true; 
 
-				var combined_para = document.getElementById('output-combined');
+				var complete_para = document.getElementById('output-gettysburg-complete');
 
-				combined_para.appendChild(document.createTextNode(markov.generate(200)));
+				complete_para.appendChild(document.createTextNode(markov.generate(100)));
 		</script>
 	</body>
 </html>
