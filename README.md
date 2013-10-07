@@ -7,7 +7,7 @@ If you supply the [Gettysburg Address](http://en.wikipedia.org/wiki/Gettysburg_A
 ## Usage
 ### Include
 ```html
-<script language="text/javascript" src="markov.js"></script>
+<script src="markov.js"></script>
 ```
 ### Instantiate
 ```javascript
