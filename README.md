@@ -1,5 +1,5 @@
 # Markov.js
-This is a toy JavaScript library that (approximately) uses [Markov Chains](https://en.wikipedia.org/wiki/Markov_chain) for text generation. I was inspired to do this while working on [Designer Ipsum](http://www.designeripsum.com). The approach is not mathematically perfect, so I wouldn't rely on it for something critical (but why would you?).
+This is a toy JavaScript library that uses [Markov Chains](https://en.wikipedia.org/wiki/Markov_chain) for text generation. I was inspired to do this while working on [Designer Ipsum](http://www.designeripsum.com). The implementation is not at all efficient, so I wouldn't rely on it for something critical (but why would you?).
 ## Usage
 Include the library.
 ```html
