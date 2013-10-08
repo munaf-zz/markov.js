@@ -1,0 +1,29 @@
+{
+  "name": "markov",
+  "version": "0.1.0",
+  "description": "JavaScript Markov chains for text generation",
+  "main": "markov.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/munaf/markov.js.git"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-jshint": "~0.6.3",
+    "grunt-contrib-uglify": "~0.2.2"
+  },
+  "keywords": [
+    "markov"
+  ],
+  "author": "Munaf Assaf",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/munaf/markov.js/issues"
+  }
+}
