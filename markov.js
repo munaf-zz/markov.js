@@ -45,7 +45,7 @@
       text = text.replace(/^\s+|\s+$/g,""); // trim spaces first
 
       return text
-        .replace(/[^a-zA-Z\s.,!?:;]/g, "") // remove illegal chars
+        .replace(/[^a-zA-Z\s.,!?:;-\']/g, "") // remove illegal chars
         .replace(/\s{2,}/g, " ");          // fix double spacing
     },
 
