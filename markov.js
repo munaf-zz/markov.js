@@ -4,8 +4,6 @@
 
   var Markov = function(options) {
 
-    var punctuationSet = ".,?!;:";
-
     this.options = {
       inputText: options.inputText,      // The input corpus
       numWords: options.numWords || 100, // # words to generate
