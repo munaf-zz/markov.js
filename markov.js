@@ -82,21 +82,12 @@
 
         nextWord = this._randomNextWord(currentWord);
 
-        if (i >= numWords) {
-          console.log("======");
-          console.log("current: ", currentWord);
-          console.log("next: ", nextWord)
-        }
-
         if (this._endsWithPunctuation(nextWord)) {
-          console.log("endsWithPunctuation");
           generatedText += nextWord;
         } else if (currentWord === SENTENCE_START) {
-          console.log("current = SENTENCE_START");
           generatedText += ' ' + this._capitalizeWord(nextWord);
           i++;
         } else if (nextWord !== SENTENCE_START) {
-          console.log("next != SENTENCE_START");
           generatedText += ' ' + nextWord;
           i++;
         }
