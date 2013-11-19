@@ -7,7 +7,7 @@
     this.options = {
       inputText: options.inputText,      // The input corpus
       numWords: options.numWords || 100, // # words to generate
-      endWithCompleteSentence: false     // end with complete sentence regardless of numWords
+      endWithCompleteSentence: options.endWithCompleteSentence || false
     }
 
     this.dictionary = {};
@@ -45,7 +45,7 @@
       text = text.replace(/^\s+|\s+$/g,""); // trim spaces first
 
       return text
-        .replace(/[^a-zA-Z\s.,!?:;-\']/g, "") // remove illegal chars
+        .replace(/[^a-zA-Z\s.,!?:;\']/g, "") // remove illegal chars
         .replace(/\s{2,}/g, " ");          // fix double spacing
     },
 
@@ -76,17 +76,27 @@
           currentWord = SENTENCE_START,
           nextWord, i = 0;
 
-      while (i < numWords || (this.options.endWithCompleteSentence === true 
-              && currentWord !== SENTENCE_START)) {
+      while (i < numWords
+              || (this.options.endWithCompleteSentence === true 
+                  && !this._endsSentence(currentWord))) {
 
         nextWord = this._randomNextWord(currentWord);
 
+        if (i >= numWords) {
+          console.log("======");
+          console.log("current: ", currentWord);
+          console.log("next: ", nextWord)
+        }
+
         if (this._endsWithPunctuation(nextWord)) {
+          console.log("endsWithPunctuation");
           generatedText += nextWord;
         } else if (currentWord === SENTENCE_START) {
+          console.log("current = SENTENCE_START");
           generatedText += ' ' + this._capitalizeWord(nextWord);
           i++;
         } else if (nextWord !== SENTENCE_START) {
+          console.log("next != SENTENCE_START");
           generatedText += ' ' + nextWord;
           i++;
         }
